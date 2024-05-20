@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend_crud.Context;
-using backend_crud.Models; // Asegúrate de que este espacio de nombres es correcto para tus modelos
+using backend_crud.Models; 
 
 [ApiController]
 [Route("api/[controller]")]
@@ -17,13 +17,13 @@ public class ReservasController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
+    [HttpGet]//Devuelve las reservas existentes
     public async Task<ActionResult<IEnumerable<Reserva>>> GetReservas()
     {
         return await _context.Reservas.Include(r => r.SalaDeJuntas).ToListAsync();
     }
 
-    [HttpPost]
+    [HttpPost]//Crear una reserva nueva.
     public async Task<IActionResult> CrearReserva([FromBody] Reserva reserva)
     {
         var reservasSuperpuestas = await _context.Reservas
@@ -47,7 +47,7 @@ public class ReservasController : ControllerBase
         return Ok(reserva);
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}")] //Liberar Reserva.
     public async Task<IActionResult> LiberarReserva(int id)
     {
         var reserva = await _context.Reservas.FindAsync(id);

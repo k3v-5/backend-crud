@@ -18,13 +18,13 @@ namespace SalaDeJuntasAPI.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet]//Devuelve las salas de juntas.
         public async Task<ActionResult<IEnumerable<SalaDeJuntas>>> GetSalaDeJuntas()
         {
             return await _context.SalaDeJuntas.ToListAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")]//Devolver una sala de juntas basada en ID.
         public async Task<ActionResult<SalaDeJuntas>> GetSalaDeJuntas(int id)
         {
             var salaDeJuntas = await _context.SalaDeJuntas.FindAsync(id);
@@ -35,7 +35,7 @@ namespace SalaDeJuntasAPI.Controllers
             return salaDeJuntas;
         }
 
-        [HttpPost]
+        [HttpPost]//crear una reserva para una sala de juntas específica.
         public async Task<IActionResult> CrearReserva([FromBody] Reserva reserva)
         {
             var reservasSuperpuestas = await _context.Reservas
@@ -59,7 +59,7 @@ namespace SalaDeJuntasAPI.Controllers
             return Ok(reserva);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}")]//actualizar una sala de juntas existente.
         public async Task<IActionResult> UpdateSalaDeJuntas(int id, SalaDeJuntas salaDeJuntas)
         {
             if (id != salaDeJuntas.Id)
@@ -73,7 +73,7 @@ namespace SalaDeJuntasAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]//eliminar una sala de juntas existente.
         public async Task<IActionResult> DeleteSalaDeJuntas(int id)
         {
             var salaDeJuntas = await _context.SalaDeJuntas.FindAsync(id);
