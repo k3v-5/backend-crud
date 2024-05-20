@@ -8,7 +8,7 @@ namespace backend_crud.Models
         public DateTime HoraInicio { get; set; }
         public DateTime HoraFin { get; set; }
 
-        [JsonIgnore]
-        public SalaDeJuntas SalaDeJuntas { get; set; }
+        
+        public SalaDeJuntas? SalaDeJuntas { get; set; }
     }
 }
